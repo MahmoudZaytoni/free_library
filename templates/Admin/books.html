@@ -6,26 +6,31 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <form method="post">
-                    <th scope="col">
+                <!-- start form  -->
+                <form method="post" enctype="multipart/form-data">
+                    <th>
                         <input type="text" name="title" class="form-control" placeholder="Title">
-                    </div>
-                    <th scope="col">
+                    </th>
+                    <th>
                         <input type="text" name="author" class="form-control" placeholder="Author">
-                    </div>
-                    <th scope="col" colspan="2">
+                    </th>
+                    <th>
                         <input type="text" name="description" class="form-control" placeholder="Description">
-                    </div>
+                    </th>
+                    <th >
+                        <input class="form-control form" name="cover" id="formFile" type="file">
+                    </th>
                     <th>
                         <button type="submit" class="btn btn-primary">Add</button>
                     </th>
                 </form>
+                <!-- end form  -->
             </tr>
             <tr>
                 <th scope="col">ID</th>
+                <th scope="col">Cover</th>
                 <th scope="col">Title</th>
                 <th scope="col">Author</th>
-                <!-- <th scope="col">Description</th> -->
                 <th scope="col">Operation</th>
             </tr>
         </thead>
@@ -33,12 +38,12 @@
             {% for book in book_data %}
             <tr>
                 <th scope="row">{{ book[0] }}</th>
-                <td>{{ book[1] }} </td>
+                <td> <img src="{{url_for('static', filename='uploads/images/' + book['cover'])}}" alt="{{book[1]}}"></td>
                 <td>{{ book[2] }}</td>
-                <!-- <td>{{ book[3] }}</td> -->
-                <td colspan="2">
+                <td> {{ book[3] }} </td>
+                <td>
                     <a href="{{url_for('update_book', id=book[0])}}" class="btn btn-secondary">Edit</a>
-                    <a href="" class="btn btn-danger">Delete</a>
+                    <a href="{{url_for('delete_book', id=book[0])}}" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
             {% endfor %}
