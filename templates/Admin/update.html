@@ -1,0 +1,29 @@
+{% extends 'Admin/admin_base.html' %}
+
+{% block admin %}
+<div class="content">
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post">
+              <div class="mb-3">
+                <label for="Id" class="form-label">ID</label>
+                <input type="text" disabled value="{{book_details[0]}}" name="id" class="form-control">
+              </div>
+              <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" name="title" value="{{book_details[1]}}" class="form-control">
+              </div>
+              <div class="mb-3">
+                <label for="title" class="form-label">Author</label>
+                <input type="text" name="author" value="{{book_details[2]}}" class="form-control">
+              </div>
+              <div class="mb-3">
+                <label for="title" class="form-label">Description</label>
+                <input type="text" name="description" value="{{book_details[3]}}" class="form-control">
+              </div>
+              <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+        </div>    
+    </div>    
+</div>
+{% endblock %}

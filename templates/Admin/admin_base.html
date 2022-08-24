@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+     <!-- The sidebar -->
+<div class="sidebar">
+  <a class="active" href="{{url_for('books')}}">Books</a>
+  <a href="">Users</a>
+</div>
+
+    {% block admin %}
+    {% endblock %}
+{% endblock %}
