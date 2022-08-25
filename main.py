@@ -17,8 +17,13 @@ def homePage():
     books = query_table('books')
     return render_template('index.html', books=books)
 
-# @app.route("/<string>")
-# def book():
+@app.route("/book/<int:id>", methods=["GET", "POST"])
+def book(id):
+    conn = get_db()
+    if request.method == "GET":
+        conn = conn.cursor().execute(f"SELECT * FROM books WHERE id={id}")
+        book_data = conn.fetchone()
+        return render_template('book.html', book=book_data)
 
 @app.route("/login")
 def login():
@@ -81,6 +86,8 @@ def update_book(id):
 def delete_book(id):
     delete_by_id('books', id)
     return redirect(url_for('books'))
+
+
 
 
 if __name__ == "__main__":

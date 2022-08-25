@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="image">
+                    <img src="{{url_for('static', filename='uploads/images/' + book['cover'])}}" alt="{{book['cover']}}">
+                </div>
+            </div>
+            <div class="col-lg-8 mb-4 text-center text-md-start">
+                <div class="text">
+                    <h4>{{book['title']}}</h4>
+                    <h3>{{book['author']}}</h3>
+                    <p class="text-black-50 fs-6">
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat nulla natus impedit, totam itaque minus architecto. Obcaecati optio tempora, consequatur, provident voluptatibus dolores nobis commodi temporibus ratione autem natus sint!
+                        {{book['description']}}
+                    </p>
+                    <a href="" class="btn btn-primary rounded-pill main-btn text-uppercase">free download</a>
+                </div>
+            </div>        
+        </div>
+    </div>
+
+
+{% endblock %}

@@ -1,3 +1,9 @@
 body {
     background-color: #DDD;
 }
+
+.box {
+    padding: 5px;
+    overflow: hidden;
+    position: relative;
+}
