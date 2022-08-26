@@ -1,20 +1,63 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
+<style>
+            h3{
+                color: rgb(226, 17, 156);
+                font-style:italic;
+               font: size 70px; ;
+               height: max-content;
+               text-align: left;
+
+            }
+    
+             h5{
+                color: rgb(1, 125, 156);
+                font-style:italic;
+               font: size 70px; ;
+               height: max-content;
+               text-align: left;
+
+            }
+            body
+             {
+              background-color: #8888;
+             }
+             div.card-body
+             {
+                color: rgb(214, 12, 12);
+                font-style: oblique;
+               font: size 50px; ;
+               height: max-content;
+               text-align: right;
+             }
+             img.card-img-top
+             {
+                border-image-outset: 100%;
+                height: auto;
+                border: 1px solid #777;
+                border: 2px solid rgb(236, 14, 6);
+                border-style: double;
+             }
+</style>
+<br>
+<div >
     <div class="row">
 
         {% for book in books %} 
         <div class="card m-3 " style="width: 18rem;">
             <img src="{{url_for('static', filename='uploads/images/' + book['cover'])}}" class="card-img-top" alt="{{book[1]}}">
             <div class="card-body">
-              <h5 class="card-title">{{book['title']}}</h5>
+              <h5 class="card-title">Title: 
+                    {{book['title']}}</h5>
+              <h3 class="card-auther">Author:
+                {{book['author']}}</h3>
               <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-              <a href="{{url_for('view.book', id=book['id'])}}" class="btn btn-primary">Go somewhere</a>
+              <a href="{{url_for('book', id=book['id'])}}" class="btn btn-primary">see the book</a>
             </div>
         </div>
         {% endfor %}
-    
+        <br>
     </div>
 </div>
 
