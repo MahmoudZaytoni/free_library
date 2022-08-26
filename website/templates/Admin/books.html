@@ -18,7 +18,14 @@
                         <input type="text" name="description" class="form-control" placeholder="Description">
                     </th>
                     <th >
-                        <input class="form-control form" name="cover" id="formFile" type="file">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="inputGroupFile01">book</label>
+                            <input class="form-control form" name="book" id="formFile" type="file">
+                        </div>
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="inputGroupFile01">img</label>
+                            <input type="file" class="form-control form" name="cover" id="inputGroupFile01">
+                        </div>
                     </th>
                     <th>
                         <button type="submit" class="btn btn-primary">Add</button>

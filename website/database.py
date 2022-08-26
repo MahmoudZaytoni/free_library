@@ -14,7 +14,7 @@ def query_table(table_name):
 def insert_book(insert_details):
     conn = get_db()
     c = conn.cursor()
-    sql_execute_string = f"INSERT INTO books (cover, title, author, description_book) VALUES (?, ?, ?, ?)"
+    sql_execute_string = f"INSERT INTO books (cover, file_name, title, author, description_book) VALUES (?, ?, ?, ?, ?)"
     c.execute(sql_execute_string, insert_details)
     conn.commit()
     conn.close()

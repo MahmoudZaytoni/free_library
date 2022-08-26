@@ -4,6 +4,7 @@ from .database import query_table, get_db, delete_by_id,insert_book
 from werkzeug.utils import secure_filename
 from flask import url_for
 from flask_login import  login_required, current_user
+from flask import send_from_directory, send_file
 views = Blueprint('view', __name__)
 
 UPLOAD_FOLDER = "website/static/uploads"
@@ -33,16 +34,20 @@ def books(): # Display Books and Add
                         book_data=book_data,
                         user=current_user)
         else:
-            file = request.files['cover']
-            filename = secure_filename(file.filename)
+            cover_file = request.files['cover']
+            book_file = request.files['book']
+            cover_filename = secure_filename(cover_file.filename)
+            book_filename = secure_filename(book_file.filename)
             book_details = (
-                filename,
+                cover_filename,
+                book_filename,
                 request.form['title'],
                 request.form['author'],
                 request.form['description']
             )
             insert_book(book_details)
-            file.save(os.path.join(UPLOAD_FOLDER + "/images",filename))
+            cover_file.save(os.path.join(UPLOAD_FOLDER + "/images",cover_filename))
+            book_file.save(os.path.join(UPLOAD_FOLDER + "/books", book_filename))
             return redirect(url_for('view.books'))
     else:
         flash("Invalid Url ", category='error')
@@ -54,11 +59,12 @@ def update_book(id):
         conn = get_db()
         if request.method == "POST":
             cover = request.form['cover']
+            file_name = request.form['book']
             title = request.form['title']
             author = request.form['author']
             description = request.form['description']
             conn.execute(f"""UPDATE books
-                            SET cover='{cover}', title='{title}',author='{author}', description_book='{description}'
+                            SET cover='{cover}', file_name='{file_name}', title='{title}',author='{author}', description_book='{description}'
                             WHERE id={id}""")
             conn.commit()
             conn.close()
@@ -85,4 +91,10 @@ def delete_book(id):
     return redirect(url_for('view.homePage'))
 
 
+@views.route("/upload/<filename>")
+def download(filename):
+    down_path = "static/uploads/books/" + filename
+    print(down_path + filename)
+    # return send_from_directory(down_path, filename)
+    return send_file(down_path, as_attachment=True)
 

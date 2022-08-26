@@ -15,9 +15,11 @@
                     <h3>{{book['author']}}</h3>
                     <p class="text-black-50 fs-6">
                         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat nulla natus impedit, totam itaque minus architecto. Obcaecati optio tempora, consequatur, provident voluptatibus dolores nobis commodi temporibus ratione autem natus sint!
-                        {{book['description']}}
+                        <br>
+                        {{book['description_book']}}
+                        <br>
                     </p>
-                    <a href="" class="btn btn-primary rounded-pill main-btn text-uppercase">free download</a>
+                    <a href="{{url_for('view.download', filename=book['file_name'])}}" class="btn btn-primary rounded-pill main-btn text-uppercase">free download</a>
                 </div>
             </div>        
         </div>
