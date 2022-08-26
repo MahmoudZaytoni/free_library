@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+
+            h3
+            {
+              color: crimson;
+              text-align: left;
+              place-content: center;
+            }
+
+            h1
+            {
+                color: blue;
+                color-scheme:unset;
+                font-style: oblique;
+               font: size 50px; ;
+text-align: start;
+            }
+            body
+            {
+                
+                background: rgba(64, 230, 64, 0.3);        
+            }
+            
+            img
+            {
+                border-image-outset: 70px;
+                height: 200px;
+                border: 1px solid #777;
+                border-style: double;
+            }
+
+            p
+            {
+                color: #ddd;
+                text-align: left;
+                font-style:italic;
+                font-weight: 2000;
+            }
+
+            div.text
+            {
+                color: rgb(238, 129, 129);
+                font-style: oblique;
+               font: size 50px; ;
+               height: max-content;
+               text-align:end;
+            }
+
+            div.col-lg-4
+            {
+                color: rgb(64, 12, 107);    
+                font-style: oblique;
+               font: size 50px; ;
+               height: max-content;
+               text-align: start;
+            }
+           
+
+</style>
+    <div>
+        
+            <div class="col-lg-4">
+                <div class="image">
+                  <img src="{{url_for('static', filename='uploads/images/' + book['cover'])}}" alt="{{book['cover']}}">
+                </div>
+            </div>
+            <div class="col-lg-8 mb-4 text-center text-md-start">
+                <div class="text">
+                    <br><br>
+
+                    <h1>Title:
+                        {{book['title']}}</h1>
+                    <h3>Author:
+                        {{book['author']}}</h3>
+                    <p class="text-black-50 fs-6">
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat nulla natus impedit, totam itaque minus architecto. Obcaecati optio tempora, consequatur, provident voluptatibus dolores nobis commodi temporibus ratione autem natus sint!
+                        {{book['description']}}
+                    </p>
+                    <a href="" class="btn btn-primary rounded-pill main-btn text-uppercase">free download</a>
+                </div>
+            </div>        
+        
+    </div>
+
+
+{% endblock %}
