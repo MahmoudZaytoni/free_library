@@ -7,20 +7,19 @@
         <thead>
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">User Name</th>
-                <th scope="col">Password</th>
                 <th scope="col">Email</th>
-                <th scope="col">Operation</th>
+                <th scope="col">Password</th>
+                <th scope="col">First_name</th>
             </tr>
         </thead>
         <tbody>
-            {% for user in user_data %}
+            {% for User in users_data %}
             <tr>
-                <th scope="row">{{ user[0] }}</th>
-                <td>{{ user[1] }} </td>
-                <td>{{ user[2] }}</td>
-                <td>{{ user[3] }}</td>
-                <td><a href="" class="btn btn-primary">Edit</a></td>
+                <th scope="row">{{ User.id }}</th>
+                <td>{{ User.email }} </td>
+                <td>{{ User.password }}</td>
+                <td>{{ user.first_name }}</td>
+
             </tr>
             {% endfor %}
         </tbody>

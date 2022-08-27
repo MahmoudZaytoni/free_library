@@ -5,6 +5,7 @@ from werkzeug.utils import secure_filename
 from flask import url_for
 from flask_login import  login_required, current_user
 from flask import send_from_directory, send_file
+from .models import User
 views = Blueprint('view', __name__)
 
 UPLOAD_FOLDER = "website/static/uploads"
@@ -53,7 +54,7 @@ def books(): # Display Books and Add
         flash("Invalid Url ", category='error')
         return redirect(url_for('view.homePage'))
 
-@views.route("/Admin/update/<int:id>", methods=["GET", "POST"]) 
+@views.route("/admin/update/<int:id>", methods=["GET", "POST"]) 
 def update_book(id):
     if current_user.email == "admin@gmail.com":
         conn = get_db()
@@ -82,7 +83,7 @@ def update_book(id):
         return redirect(url_for('view.homePage'))
 
 
-@views.route("/Admin/delete/<int:id>")
+@views.route("/admin/delete/<int:id>")
 def delete_book(id):
     if current_user.email == "admin@gmail.com":
         delete_by_id('books', id)
@@ -98,3 +99,7 @@ def download(filename):
     # return send_from_directory(down_path, filename)
     return send_file(down_path, as_attachment=True)
 
+@views.route("/admin/users")
+def display():
+    user = User.query.order_by(User.id).all()
+    return render_template("Admin/users.html", users_data=user, user=current_user, custom_css="admin")
