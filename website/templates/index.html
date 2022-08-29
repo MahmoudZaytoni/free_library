@@ -1,5 +1,13 @@
 {% extends 'base.html' %}
 
+{% block nav %}
+<form class="d-flex" role="search" method="post">
+  <input name="search" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+  <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
+{% endblock %}
+
+
 {% block content %}
 <style>
             h3{
@@ -19,10 +27,6 @@
                text-align: left;
 
             }
-            body
-             {
-              background-color: #8888;
-             }
              div.card-body
              {
                 color: rgb(214, 12, 12);
@@ -41,7 +45,8 @@
              }
 </style>
 <br>
-<div >
+<div class="container">
+  <div>
     <div class="row">
 
         {% for book in books %} 
@@ -59,6 +64,7 @@
         {% endfor %}
         <br>
     </div>
+  </div>
 </div>
 
 {% endblock %}

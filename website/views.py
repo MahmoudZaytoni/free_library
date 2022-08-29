@@ -10,10 +10,17 @@ views = Blueprint('view', __name__)
 
 UPLOAD_FOLDER = "website/static/uploads"
 
-@views.route("/")
+@views.route("/", methods=['GET', 'POST'])
 @login_required
 def homePage():
-    books = query_table('books')
+    if 'search' in request.form:
+        search = request.form.get('search')
+        conn = get_db().cursor()
+        conn.execute(f"SELECT * FROM books WHERE title like '%{search}%'")
+        books = conn.fetchall()
+        conn.close()
+    else:
+        books = query_table('books')
     return render_template('index.html', books=books, user=current_user)
 
 
