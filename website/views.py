@@ -96,7 +96,7 @@ def delete_book(id):
         delete_by_id('books', id)
     else:
         flash("Invalid Url ", category='error')
-    return redirect(url_for('view.homePage'))
+    return redirect(url_for('view.books'))
 
 
 @views.route("/upload/<filename>")
