@@ -11,7 +11,7 @@ def create_app():
     UPLOAD_FOLDER = "static/uploads"
     app.config['SECRET_KEY'] = 'secretkey'
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-    app.config['SQLALCHEMEY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     db.init_app(app)
 
 
@@ -37,6 +37,6 @@ def create_app():
     return app
 
 def create_database(app):
-    if not path.exists('website/' + DB_NAME):
+    if not path.exists('website/'+ DB_NAME):
         db.create_all(app=app)
         print('Created Databas!')
