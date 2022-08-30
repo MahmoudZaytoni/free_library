@@ -56,14 +56,14 @@
       {% if category == 'error' %}
       <div class="alert alert-danger alert-dismissible fade show" role="alert">
         {% for line in message.split('\n') %}
-          <h4>{{ line }} <br></h4>
+          <h6>{{ line }} <br></h6>
         {% endfor %}
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
       </div>
       {% else %}
       <div class="alert alert-success alert-dismissible fade show" role="alert">
         {% for line in message.split('\n') %}
-        <h4>{{ line }} <br></h4>
+        <h6>{{ line }} <br></h6>
         {% endfor %}
         <button type="button" class="btn-close" aria-label="Close" data-bs-dismiss="alert"></button>
       </div>

@@ -45,9 +45,9 @@
             {% for book in book_data %}
             <tr>
                 <th scope="row">{{ book[0] }}</th>
-                <td> <img src="{{url_for('static', filename='uploads/images/' + book['cover'])}}" alt="{{book[1]}}"></td>
-                <td>{{ book[2] }}</td>
-                <td> {{ book[3] }} </td>
+                <td> <img src="{{url_for('static', filename='uploads/images/' + book['cover'])}}" alt="{{book[1]}}" ></td>
+                <td>{{ book['title'] }}</td>
+                <td> {{ book['author'] }} </td>
                 <td>
                     <a href="{{url_for('view.update_book', id=book[0])}}" class="btn btn-secondary">Edit</a>
                     <a href="{{url_for('view.delete_book', id=book[0])}}" class="btn btn-danger">Delete</a>
