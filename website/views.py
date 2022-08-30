@@ -6,6 +6,7 @@ from flask import url_for
 from flask_login import  login_required, current_user
 from flask import send_from_directory, send_file
 from .models import User
+from .auth import admin_email
 views = Blueprint('view', __name__)
 
 UPLOAD_FOLDER = "website/static/uploads"
@@ -34,7 +35,7 @@ def book(id):
 
 @views.route("/admin", methods=["GET", "POST"])
 def books(): # Display Books and Add
-    if current_user.email == "admin@gmail.com":
+    if current_user.email == admin_email:
         book_data = query_table("books")
         if request.method == "GET":
             return render_template("Admin/books.html",
@@ -63,7 +64,7 @@ def books(): # Display Books and Add
 
 @views.route("/admin/update/<int:id>", methods=["GET", "POST"]) 
 def update_book(id):
-    if current_user.email == "admin@gmail.com":
+    if current_user.email == admin_email:
         conn = get_db()
         if request.method == "POST":
             cover = request.form['cover']
@@ -92,7 +93,7 @@ def update_book(id):
 
 @views.route("/admin/delete/<int:id>")
 def delete_book(id):
-    if current_user.email == "admin@gmail.com":
+    if current_user.email == admin_email:
         delete_by_id('books', id)
     else:
         flash("Invalid Url ", category='error')

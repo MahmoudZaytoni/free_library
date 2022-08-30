@@ -4,8 +4,9 @@ from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user
 from . import db
-auth = Blueprint('auth', __name__)
 
+auth = Blueprint('auth', __name__)
+admin_email = "admin@gmail.com"
 
 @auth.route("/login", methods=["POST", "GET"])
 def login():
@@ -16,7 +17,10 @@ def login():
         user = User.query.filter_by(email=email).first()
         if user:
             if check_password_hash(user.password, password):
-                flash("Logged in succefully !", category='success')
+                if email == admin_email:
+                    flash("Admin Logged in Successfully", category='success')
+                else:
+                    flash(f"Welcome Back {user.first_name}!\n Start having Fun with our free books", category='success')
                 login_user(user, remember=True)
                 return redirect(url_for('view.homePage'))
             else:
@@ -42,19 +46,16 @@ def register():
         user = User.query.filter_by(email=email).first()
         if user:
             flash("Email Already Exist. ", category='error')
-        elif len(email) < 4:
-            flash('Email must be grater than 3 characters. ', category='error')
-        elif len(firstName) < 2: 
-            flash('Name must be grater than 1 characters. ', category='error')
         elif password1 != password2:
-            flash("Password don't mathch ", category='error')
-        elif len(password1) < 7:
-            flash("Password must be at least 7 character", category='error')
+            flash("Password don't match ", category='error')
         else:
             new_user = User(email=email, first_name=firstName, password=generate_password_hash(password1, method='sha256'))
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)
-            flash("Account Created", category='success')
+            if email == admin_email:
+                flash("Created Admin Account Successfuly", categroy='success')
+            else:
+                flash(f"Welcome {firstName}\nStart having fun with our Free books", category='success')
             return redirect(url_for("view.homePage"))
     return render_template('register.html', user=current_user)
